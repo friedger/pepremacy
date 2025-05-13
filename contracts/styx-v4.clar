@@ -467,17 +467,17 @@
     (height uint)
     (wtx {
       version: (buff 4),
-      ins: (list 8 {
+      ins: (list 50 {
         outpoint: {
           hash: (buff 32),
           index: (buff 4),
         },
-        scriptSig: (buff 256),
+        scriptSig: (buff 1376),
         sequence: (buff 4),
       }),
-      outs: (list 8 {
+      outs: (list 50 {
         value: (buff 8),
-        scriptPubKey: (buff 128),
+        scriptPubKey: (buff 1376),
       }),
       locktime: (buff 4),
     })
@@ -488,7 +488,7 @@
     (wproof (list 14 (buff 32)))
     (witness-merkle-root (buff 32))
     (witness-reserved-value (buff 32))
-    (ctx (buff 1024))
+    (ctx (buff 4096))
     (cproof (list 14 (buff 32)))
     (min-pepe-out uint)
   )
