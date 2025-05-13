@@ -68,7 +68,7 @@
 )
 
 ;; ---- Helper functions ----
-(define-read-only (read-uint32 (ctx {
+(define-read-only (read-uint64 (ctx {
   txbuff: (buff 4096),
   index: uint,
 }))
@@ -77,12 +77,12 @@
       (base (get index ctx))
     )
     (ok {
-      uint32: (buff-to-uint-le (unwrap-panic (as-max-len?
-        (unwrap! (slice? data base (+ base u4)) (err ERR-OUT-OF-BOUNDS)) u4
+      uint64: (buff-to-uint-le (unwrap-panic (as-max-len?
+        (unwrap! (slice? data base (+ base u8)) (err ERR-OUT-OF-BOUNDS)) u8
       ))),
       ctx: {
         txbuff: data,
-        index: (+ u4 base),
+        index: (+ u8 base),
       },
     })
   )
@@ -104,8 +104,8 @@
   (if (is-eq (get scriptPubKey entry) (get pubscriptkey result))
     (merge result { out: (some {
       scriptPubKey: (get scriptPubKey entry),
-      value: (get uint32
-        (unwrap-panic (read-uint32 {
+      value: (get uint64
+        (unwrap-panic (read-uint64 {
           txbuff: (get value entry),
           index: u0,
         }))
