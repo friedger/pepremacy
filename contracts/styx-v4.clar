@@ -90,13 +90,13 @@
 
 (define-private (find-out
     (entry {
-      scriptPubKey: (buff 128),
+      scriptPubKey: (buff 1376),
       value: (buff 8),
     })
     (result {
-      pubscriptkey: (buff 40),
+      pubscriptkey: (buff 1376),
       out: (optional {
-        scriptPubKey: (buff 128),
+        scriptPubKey: (buff 1376),
         value: uint,
       }),
     })
@@ -119,21 +119,21 @@
 (define-public (get-out-value
     (tx {
       version: (buff 4),
-      ins: (list 8 {
+      ins: (list 50 {
         outpoint: {
           hash: (buff 32),
           index: (buff 4),
         },
-        scriptSig: (buff 256),
+        scriptSig: (buff 1376),
         sequence: (buff 4),
       }),
-      outs: (list 8 {
+      outs: (list 50 {
         value: (buff 8),
-        scriptPubKey: (buff 128),
+        scriptPubKey: (buff 1376),
       }),
       locktime: (buff 4),
     })
-    (pubscriptkey (buff 40))
+    (pubscriptkey (buff 1376))
   )
   (ok (fold find-out (get outs tx) {
     pubscriptkey: pubscriptkey,
@@ -497,7 +497,7 @@
       (fixed-fee (get fee current-pool))
       (btc-receiver (get btc-receiver current-pool))
       (tx-buff (contract-call?
-        'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.bitcoin-helper-wtx-v1
+        'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.bitcoin-helper-wtx-v2
         concat-wtx wtx witness-data
       ))
     )
@@ -585,17 +585,17 @@
     (blockheader (buff 80))
     (tx {
       version: (buff 4),
-      ins: (list 8 {
+      ins: (list 50 {
         outpoint: {
           hash: (buff 32),
           index: (buff 4),
         },
-        scriptSig: (buff 256),
+        scriptSig: (buff 1376),
         sequence: (buff 4),
       }),
-      outs: (list 8 {
+      outs: (list 50 {
         value: (buff 8),
-        scriptPubKey: (buff 128),
+        scriptPubKey: (buff 1376),
       }),
       locktime: (buff 4),
     })
@@ -611,7 +611,7 @@
       (fixed-fee (get fee current-pool))
       (btc-receiver (get btc-receiver current-pool))
       (tx-buff (contract-call?
-        'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.clarity-bitcoin-helper
+        'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.clarity-bitcoin-helper-v2
         concat-tx tx
       ))
     )
